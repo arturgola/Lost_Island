@@ -108,5 +108,14 @@ polygon = PackedVector2Array(198, -2, 525, 2, 528, 188, 494, 188, 494, 199, 453,
 position = Vector2(474, 193)
 shape = SubResource("RectangleShape2D_71j4m")
 
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="KillCounterLabel" type="Label" parent="UI"]
+offset_left = 454.0
+offset_top = 13.0
+offset_right = 501.0
+offset_bottom = 36.0
+text = "score:"
+
 [connection signal="body_entered" from="cliffside_transition_point" to="." method="_on_cliffside_transition_point_body_entered"]
 [connection signal="body_exited" from="cliffside_transition_point" to="." method="_on_cliffside_transition_point_body_exited"]

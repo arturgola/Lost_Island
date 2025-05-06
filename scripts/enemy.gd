@@ -52,8 +52,7 @@ func deal_with_damage():
 			can_take_damage = false
 			print("enemy health = ", health)
 		if health < 0:
-			global.enemies_killed += 1
-			print("Enemies killed: ", global.enemies_killed)
+			global.update_enemy_counter()
 			self.queue_free()
 
 
