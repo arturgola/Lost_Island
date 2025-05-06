@@ -139,3 +139,12 @@ func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()
 	global.player_current_attack = false
 	attack_ip = false
+
+func current_camera():
+	if global.current_scene == "world":
+		$world_camera.enable = true
+		$cliffside_camera.enabled = false
+	elif global.current_scene == "cliff_side":
+		$world_camera.enable = false
+		$cliffside_camera.enabled = true
+		

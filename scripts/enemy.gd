@@ -51,10 +51,10 @@ func deal_with_damage():
 			$take_damage_cooldown.start()
 			can_take_damage = false
 			print("enemy health = ", health)
-			if health < 0:
-				self.queue_free()
-			
-			
+		if health < 0:
+			global.enemies_killed += 1
+			print("Enemies killed: ", global.enemies_killed)
+			self.queue_free()
 
 
 func _on_take_damage_cooldown_timeout():
