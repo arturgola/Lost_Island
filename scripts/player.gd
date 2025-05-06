@@ -10,9 +10,15 @@ var attack_ip = false
 const speed = 100
 var current_dir = "none"
 
+func _on_damage_flash_timer_timeout():
+	$AnimatedSprite2D.modulate = Color(1, 1, 1)
+	$AnimatedSprite2D.scale = Vector2(1, 1)
+
 func _ready():
 	$AnimatedSprite2D.play("front_idle")
 	$attack_cooldown.timeout.connect(on_attack_cooldown_timeout)
+	$damage_flash_timer.timeout.connect(_on_damage_flash_timer_timeout)
+
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -102,10 +108,17 @@ func _on_player_hitbox_body_exited(body):
 
 func enemy_attack():
 	if enemy_inattack_range and enemy_attack_cooldown == true:
-		health = health - 10
+		health -= 10
 		enemy_attack_cooldown = false
 		$attack_cooldown.start()
+
+		# Flash red
+		$AnimatedSprite2D.modulate = Color(1, 0, 0) # Red
+		$AnimatedSprite2D.scale = Vector2(1.2, 1.2)
+		$damage_flash_timer.start()
+
 		print("Player Health: ", health)
+
 
 func on_attack_cooldown_timeout():
 	enemy_attack_cooldown = true
@@ -147,4 +160,3 @@ func current_camera():
 	elif global.current_scene == "cliff_side":
 		$world_camera.enable = false
 		$cliffside_camera.enabled = true
-		
