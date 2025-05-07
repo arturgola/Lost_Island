@@ -10,6 +10,10 @@ var attack_ip = false
 const speed = 100
 var current_dir = "none"
 
+var back_walk_frames = [2,5]
+var front_walk_frames = [2,5]
+var side_walk_frames = [2,5]
+
 func _on_damage_flash_timer_timeout():
 	$AnimatedSprite2D.modulate = Color(1, 1, 1)
 	$AnimatedSprite2D.scale = Vector2(1, 1)
@@ -116,6 +120,8 @@ func enemy_attack():
 		$AnimatedSprite2D.modulate = Color(1, 0, 0) # Red
 		$AnimatedSprite2D.scale = Vector2(1.2, 1.2)
 		$damage_flash_timer.start()
+		
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_RECEIVE_DAMAGE)
 
 		print("Player Health: ", health)
 
@@ -160,3 +166,21 @@ func current_camera():
 	elif global.current_scene == "cliff_side":
 		$world_camera.enable = false
 		$cliffside_camera.enabled = true
+
+func _on_animated_sprite_2d_frame_changed():
+	if $AnimatedSprite2D.animation == "back_attack": return
+	if $AnimatedSprite2D.animation == "back_idle": return
+	if $AnimatedSprite2D.animation == "death": return
+	if $AnimatedSprite2D.animation == "front_attack": return
+	if $AnimatedSprite2D.animation == "front_idle": return
+	if $AnimatedSprite2D.animation == "side_idle": return
+
+	if $AnimatedSprite2D.animation == "back_walk":
+		if $AnimatedSprite2D.frame in back_walk_frames: 
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_WALK)
+	if $AnimatedSprite2D.animation == "front_walk":
+		if $AnimatedSprite2D.frame in front_walk_frames: 
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_WALK)
+	if $AnimatedSprite2D.animation == "side_walk":
+		if $AnimatedSprite2D.frame in side_walk_frames: 
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_WALK)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://dwn2g751ywtot"]
 
 [ext_resource type="Script" uid="uid://b6mdx2qjlfe5s" path="res://scripts/enemy.gd" id="1_4dimn"]
-[ext_resource type="Texture2D" uid="uid://nxctmm0byj5n" path="res://sprites/characters/slime.png" id="1_mxe5j"]
+[ext_resource type="Texture2D" uid="uid://cqpih02l8vmdj" path="res://sprites/characters/slime.png" id="1_mxe5j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4dimn"]
 atlas = ExtResource("1_mxe5j")
@@ -163,6 +163,10 @@ shape = SubResource("CircleShape2D_4dimn")
 
 [node name="take_damage_cooldown" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="damage_flash_timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]

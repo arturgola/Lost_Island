@@ -1,7 +1,7 @@
 [gd_scene load_steps=57 format=3 uid="uid://baq2p4lj76ulq"]
 
 [ext_resource type="Script" uid="uid://b7jjb8bh8n4r0" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://fs0ajike7sb5" path="res://sprites/characters/player.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://brr2bvpyf30lv" path="res://sprites/characters/player.png" id="2_qhqgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("2_qhqgy")
@@ -470,6 +470,7 @@ drag_vertical_enabled = true
 wait_time = 0.1
 one_shot = true
 
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
 [connection signal="timeout" from="deal_attack_timer" to="." method="_on_deal_attack_timer_timeout"]

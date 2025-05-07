@@ -13,6 +13,8 @@ var player_exit_cliffside_posy = 0
 var player_start_posx = 0
 var player_start_posy = 0
 
+var rng = RandomNumberGenerator.new()
+
 func _ready():
 	label_enemies_killed = get_tree().root.get_node("world/UI/KillCounterLabel")
 	if label_enemies_killed:

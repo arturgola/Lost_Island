@@ -8,6 +8,13 @@ var health = 100
 var player_inattack_zone = false
 var can_take_damage = true
 
+func _on_damage_flash_timer_timeout():
+	$AnimatedSprite2D.modulate = Color(1, 1, 1)
+	$AnimatedSprite2D.scale = Vector2(1, 1)
+
+func _ready():
+	$damage_flash_timer.timeout.connect(_on_damage_flash_timer_timeout)
+
 func _physics_process(delta):
 	
 	deal_with_damage()
@@ -47,6 +54,10 @@ func _on_enemy_hitbox_body_exited(body: Node2D) -> void:
 func deal_with_damage():
 	if player_inattack_zone and global.player_current_attack == true:
 		if can_take_damage == true:
+			$AnimatedSprite2D.modulate = Color(1, 0, 0) # Red
+			$AnimatedSprite2D.scale = Vector2(1.2, 1.2)
+			$damage_flash_timer.start()
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ON_ENEMY_RECEIVE_DAMAGE)
 			health = health - 100
 			$take_damage_cooldown.start()
 			can_take_damage = false
