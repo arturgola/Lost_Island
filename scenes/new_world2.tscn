@@ -346,6 +346,7 @@ layer_2/name = "three"
 position = Vector2(366, 160)
 
 [node name="UI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="DialogPanel" type="Panel" parent="UI"]
 anchors_preset = -1
