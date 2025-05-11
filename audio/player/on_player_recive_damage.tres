@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://bwxp363ex4h8m"]
+
+[ext_resource type="Script" uid="uid://bsqu5emxnrnbg" path="res://scripts/audio/SoundEffectSetting.gd" id="1_wyqqk"]
+[ext_resource type="AudioStream" uid="uid://byfgg0wgcxpir" path="res://audio/player/PlayerReceiveDamage.mp3" id="2_rb7lu"]
+
+[resource]
+script = ExtResource("1_wyqqk")
+limit = 5
+type = 0
+sound_effect = ExtResource("2_rb7lu")
+volume = 0.0
+pitch_scale = 1.0
+pitch_randomness = 0.2
+metadata/_custom_type_script = "uid://bsqu5emxnrnbg"

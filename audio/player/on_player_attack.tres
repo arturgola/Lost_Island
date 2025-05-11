@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://chayi0g12o43j"]
+
+[ext_resource type="Script" uid="uid://bsqu5emxnrnbg" path="res://scripts/audio/SoundEffectSetting.gd" id="1_lf2bo"]
+[ext_resource type="AudioStream" uid="uid://d33q62nyrf3rg" path="res://audio/player/PlayerAttack.mp3" id="2_rjeeo"]
+
+[resource]
+script = ExtResource("1_lf2bo")
+limit = 5
+type = 3
+sound_effect = ExtResource("2_rjeeo")
+volume = 0.0
+pitch_scale = 1.25
+pitch_randomness = 0.05
+metadata/_custom_type_script = "uid://bsqu5emxnrnbg"

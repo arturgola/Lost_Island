@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv4e414sl1f6g"]
+
+[ext_resource type="Texture2D" uid="uid://bl3idpapf71q6" path="res://sprites/door.png" id="1_gy8r6"]
+[ext_resource type="Script" uid="uid://dx3rrs3h5o14m" path="res://scripts/door_next_level.gd" id="1_tb4o5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tb4o5"]
+radius = 50.0
+
+[node name="DoorNextLevel" type="Node2D"]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_tb4o5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(19.3333, 27.6667)
+scale = Vector2(3.41667, 4.45833)
+texture = ExtResource("1_gy8r6")
+
+[node name="HealthPackBox" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealthPackBox"]
+position = Vector2(20, 26.6667)
+shape = SubResource("CircleShape2D_tb4o5")
+
+[connection signal="body_entered" from="HealthPackBox" to="." method="_on_health_pack_box_body_entered"]

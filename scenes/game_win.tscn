@@ -1,0 +1,146 @@
+[gd_scene load_steps=8 format=3 uid="uid://ceettgo8lib0x"]
+
+[ext_resource type="Script" uid="uid://hwl0j4j6igd0" path="res://scripts/menus/game_win.gd" id="1_l1273"]
+[ext_resource type="Texture2D" uid="uid://demf7p73e8v5t" path="res://sprites/win_back.png" id="2_7ej5r"]
+[ext_resource type="FontFile" uid="uid://kbt2cporuer2" path="res://sprites/dogicapixelbold.ttf" id="2_l1273"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ej5r"]
+texture = ExtResource("2_7ej5r")
+modulate_color = Color(0.892756, 0.892756, 0.892756, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oueg3"]
+bg_color = Color(0.751881, 0.751881, 0.751881, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.187176, 0.187176, 0.187176, 0.6)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mtd57"]
+bg_color = Color(0.544974, 0.544974, 0.544974, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.187176, 0.187176, 0.187176, 0.6)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lynnb"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.187176, 0.187176, 0.187176, 0.6)
+shadow_size = 4
+
+[node name="Control" type="Control" node_paths=PackedStringArray("scoreLabel")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1284.0
+offset_bottom = 742.0
+script = ExtResource("1_l1273")
+scoreLabel = NodePath("Score")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_7ej5r")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(0.415, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.554
+anchor_right = 0.5
+anchor_bottom = 0.554
+offset_left = -141.0
+offset_top = 0.931976
+offset_right = 142.0
+offset_bottom = 164.932
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Main Menu" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/align_to_largest_stylebox = 1
+theme_override_fonts/font = ExtResource("2_l1273")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxFlat_oueg3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mtd57")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lynnb")
+text = "Main Menu
+"
+
+[node name="New Game" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/align_to_largest_stylebox = 1
+theme_override_fonts/font = ExtResource("2_l1273")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxFlat_oueg3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mtd57")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lynnb")
+text = "New Game
+"
+
+[node name="exit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/align_to_largest_stylebox = 1
+theme_override_fonts/font = ExtResource("2_l1273")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxFlat_oueg3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mtd57")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lynnb")
+text = "Exit
+"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -500.0
+offset_top = 81.0
+offset_right = 496.0
+offset_bottom = 244.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 20
+theme_override_fonts/font = ExtResource("2_l1273")
+theme_override_font_sizes/font_size = 80
+text = "YOU WON"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -629.0
+offset_top = 200.0
+offset_right = 637.0
+offset_bottom = 363.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_l1273")
+theme_override_font_sizes/font_size = 32
+text = "Your score"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/Main Menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/New Game" to="." method="_on_new_game_pressed"]

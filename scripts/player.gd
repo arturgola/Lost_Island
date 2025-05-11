@@ -1,14 +1,20 @@
 extends CharacterBody2D
 
-var enemy_inattack_range = false
-var enemy_attack_cooldown = true
-var health = 100
+class_name Player
+
+signal healthChanged
+
+# Remove @onready for basic variables
+var maxHealth = 100
+var health = maxHealth
 var player_alive = true
-
 var attack_ip = false
-
-const speed = 100
+var speed = 100
 var current_dir = "none"
+
+# Initialize other variables
+@onready var enemy_inattack_range = false
+@onready var enemy_attack_cooldown = true
 
 var back_walk_frames = [2,5]
 var front_walk_frames = [2,5]
@@ -19,23 +25,38 @@ func _on_damage_flash_timer_timeout():
 	$AnimatedSprite2D.scale = Vector2(1, 1)
 
 func _ready():
+	add_to_group("Player")
 	$AnimatedSprite2D.play("front_idle")
 	$attack_cooldown.timeout.connect(on_attack_cooldown_timeout)
 	$damage_flash_timer.timeout.connect(_on_damage_flash_timer_timeout)
 
 
 func _physics_process(delta):
+	if not player_alive:
+		return
+		
 	player_movement(delta)
 	enemy_attack()
 	attack()
 	
-	if health <= 0:
+	if health <= 0 and player_alive:
 		player_alive = false #add here end screen
 		health = 0
-		print("player died")
-		self.queue_free()
+		
+		$AnimatedSprite2D.play("death", 0.3)
+		await $AnimatedSprite2D.animation_finished
+		
+		print("ready")
+		
+		get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+		
 
 func player_movement(delta):
+	if attack_ip:  # Prevent movement when attacking
+		velocity.x = 0
+		velocity.y = 0
+		return  # Exit the function early to stop movement
+
 	if Input.is_action_pressed("ui_right"):
 		current_dir = "right"
 		play_amin(1)
@@ -63,7 +84,12 @@ func player_movement(delta):
 	
 	move_and_slide()
 
+
 func play_amin(movement):
+	if not player_alive:
+		# If the player is dead, don't override the death animation
+		return
+		
 	var dir = current_dir
 	var anim = $AnimatedSprite2D
 	
@@ -113,6 +139,7 @@ func _on_player_hitbox_body_exited(body):
 func enemy_attack():
 	if enemy_inattack_range and enemy_attack_cooldown == true:
 		health -= 10
+		healthChanged.emit()
 		enemy_attack_cooldown = false
 		$attack_cooldown.start()
 
@@ -123,7 +150,7 @@ func enemy_attack():
 		
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_RECEIVE_DAMAGE)
 
-		print("Player Health: ", health)
+		#print("Player Health: ", health)
 
 
 func on_attack_cooldown_timeout():
@@ -138,20 +165,20 @@ func attack():
 
 		if dir == "right":
 			$AnimatedSprite2D.flip_h = false
-			$AnimatedSprite2D.play("side_attack")
+			$AnimatedSprite2D.play("side_attack",1.5)
 			$deal_attack_timer.start()
 
 		if dir == "left":
 			$AnimatedSprite2D.flip_h = true
-			$AnimatedSprite2D.play("side_attack")
+			$AnimatedSprite2D.play("side_attack",1.5)
 			$deal_attack_timer.start()
 
 		if dir == "down":
-			$AnimatedSprite2D.play("front_attack")
+			$AnimatedSprite2D.play("front_attack",1.5)
 			$deal_attack_timer.start()
 
 		if dir == "up":
-			$AnimatedSprite2D.play("back_attack")
+			$AnimatedSprite2D.play("back_attack",1.5)
 			$deal_attack_timer.start()
 
 func _on_deal_attack_timer_timeout():
@@ -168,12 +195,22 @@ func current_camera():
 		$cliffside_camera.enabled = true
 
 func _on_animated_sprite_2d_frame_changed():
-	if $AnimatedSprite2D.animation == "back_attack": return
 	if $AnimatedSprite2D.animation == "back_idle": return
 	if $AnimatedSprite2D.animation == "death": return
-	if $AnimatedSprite2D.animation == "front_attack": return
 	if $AnimatedSprite2D.animation == "front_idle": return
 	if $AnimatedSprite2D.animation == "side_idle": return
+	
+	if $AnimatedSprite2D.animation == "back_attack": 
+		if $AnimatedSprite2D.frame == 1:
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_ATTACK)
+		
+	if $AnimatedSprite2D.animation == "front_attack": 
+		if $AnimatedSprite2D.frame == 1:
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_ATTACK)
+	
+	if $AnimatedSprite2D.animation == "side_attack":
+		if $AnimatedSprite2D.frame == 1:
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_ATTACK)
 
 	if $AnimatedSprite2D.animation == "back_walk":
 		if $AnimatedSprite2D.frame in back_walk_frames: 

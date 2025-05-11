@@ -1,11 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://jjnc0u60l006"]
+[gd_scene load_steps=8 format=3 uid="uid://jjnc0u60l006"]
 
 [ext_resource type="Script" uid="uid://hnskaakf1a2w" path="res://scripts/audio/AudioManager.gd" id="1_8qd8g"]
 [ext_resource type="Script" uid="uid://bsqu5emxnrnbg" path="res://scripts/audio/SoundEffectSetting.gd" id="2_3asnw"]
-[ext_resource type="Resource" uid="uid://bwxp363ex4h8m" path="res://audio/on_player_recive_damage.tres" id="3_m6ggh"]
-[ext_resource type="Resource" uid="uid://chayi0g12o43j" path="res://audio/on_enemy_recive_damage.tres" id="4_aoitu"]
-[ext_resource type="Resource" uid="uid://cvrb7qsmlgq18" path="res://audio/on_player_walk.tres" id="5_aoitu"]
+[ext_resource type="Resource" uid="uid://bwxp363ex4h8m" path="res://audio/player/on_player_recive_damage.tres" id="3_m6ggh"]
+[ext_resource type="Resource" uid="uid://chayi0g12o43j" path="res://audio/player/on_player_attack.tres" id="4_aoitu"]
+[ext_resource type="Resource" uid="uid://cvrb7qsmlgq18" path="res://audio/player/on_player_walk.tres" id="5_aoitu"]
+[ext_resource type="Resource" uid="uid://cg4c8jj33lpto" path="res://audio/player/on_health_picked_up.tres" id="6_njtn3"]
+[ext_resource type="Resource" uid="uid://dmmbtg4v61bmw" path="res://audio/music/LVL1_music.tres" id="7_kq7b2"]
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_8qd8g")
-sound_effects = Array[ExtResource("2_3asnw")]([ExtResource("3_m6ggh"), ExtResource("4_aoitu"), ExtResource("5_aoitu")])
+sound_effects = Array[ExtResource("2_3asnw")]([ExtResource("3_m6ggh"), ExtResource("4_aoitu"), ExtResource("5_aoitu"), ExtResource("6_njtn3"), ExtResource("7_kq7b2")])

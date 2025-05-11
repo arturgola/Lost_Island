@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://cg4c8jj33lpto"]
+
+[ext_resource type="Script" uid="uid://bsqu5emxnrnbg" path="res://scripts/audio/SoundEffectSetting.gd" id="1_4yta8"]
+[ext_resource type="AudioStream" uid="uid://vc3glcdgcg55" path="res://audio/player/healthPackPicked.mp3" id="2_12nre"]
+
+[resource]
+script = ExtResource("1_4yta8")
+limit = 5
+type = 4
+sound_effect = ExtResource("2_12nre")
+volume = 0.0
+pitch_scale = 1.0
+pitch_randomness = 0.0
+metadata/_custom_type_script = "uid://bsqu5emxnrnbg"
